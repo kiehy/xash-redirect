@@ -1,12 +1,19 @@
 #pragma once
 
 #include <string>
+#include <cstdint>
+
+struct ServerAddress
+{
+    std::string ip = "127.0.0.1";
+    uint16_t port = 27015;
+};
 
 struct Config
 {
     bool enabled = true;
 
-    std::string destination = "127.0.0.1:27015";
+    ServerAddress destination;
 
     float delay = 0.0f;
 

@@ -4,6 +4,9 @@
 #include "util.h"
 #include "config.h"
 
+#include <unistd.h>
+#include <limits.h>
+
 meta_globals_t *gpMetaGlobals;
 gamedll_funcs_t *gpGamedllFuncs;
 mutil_funcs_t *gpMetaUtilFuncs;
@@ -48,12 +51,20 @@ C_DLLEXPORT int Meta_Attach(PLUG_LOADTIME now, META_FUNCTIONS *pFunctionTable, m
 
 	Log("Plugin loaded successfully.");
   
-        Config_Load("configs/xash_redirect.ini");
+        Config_Load("cstrike/addons/xash_redirect/xash_redirect.ini");
  
 	if (meta_init_rehlds_api())
 		g_engfuncs.pfnServerPrint("ReHLDS API successfully initialized.\n");
 
 	memcpy(pFunctionTable, &gMetaFunctionTable, sizeof(META_FUNCTIONS));
+
+        char cwd[PATH_MAX];
+
+if (getcwd(cwd, sizeof(cwd)))
+{
+    Log("Current working directory: %s", cwd);
+}   
+
 	return TRUE;
 }
 

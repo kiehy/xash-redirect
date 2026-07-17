@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <cstdlib>
 
 Config g_Config;
 
@@ -48,7 +49,19 @@ bool Config_Load(const char *filename)
             g_Config.enabled = (value == "1");
 
         else if (key == "destination")
-            g_Config.destination = value;
+{
+    auto pos = value.find(':');
+
+    if (pos != std::string::npos)
+    {
+        g_Config.destination.ip = value.substr(0, pos);
+        g_Config.destination.port =
+            static_cast<uint16_t>(std::strtoul(
+                value.substr(pos + 1).c_str(),
+                nullptr,
+                10));
+    }
+}
 
         else if (key == "delay")
             g_Config.delay = std::stof(value);
@@ -59,7 +72,11 @@ bool Config_Load(const char *filename)
 
     Log("Configuration loaded.");
     Log("Enabled: %s", g_Config.enabled ? "yes" : "no");
-    Log("Destination: %s", g_Config.destination.c_str());
+    Log(
+    "Destination: %s:%u",
+    g_Config.destination.ip.c_str(),
+    g_Config.destination.port
+);
     Log("Delay: %.2f", g_Config.delay);
     Log("Debug: %s", g_Config.debug ? "yes" : "no");
 
