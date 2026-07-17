@@ -1,6 +1,8 @@
 #include <extdll.h>
 #include <meta_api.h>
 #include "ex_rehlds_api.h"
+#include "util.h"
+
 
 meta_globals_t *gpMetaGlobals;
 gamedll_funcs_t *gpGamedllFuncs;
@@ -44,7 +46,7 @@ C_DLLEXPORT int Meta_Attach(PLUG_LOADTIME now, META_FUNCTIONS *pFunctionTable, m
 	gpMetaGlobals = pMGlobals;
 	gpGamedllFuncs = pGamedllFuncs;
 
-	g_engfuncs.pfnServerPrint("\n################\n# Hello World! #\n################\n\n");
+	Log("Plugin loaded successfully.");
 
 	if (meta_init_rehlds_api())
 		g_engfuncs.pfnServerPrint("ReHLDS API successfully initialized.\n");

@@ -1,5 +1,8 @@
 #include <extdll.h>
 #include <meta_api.h>
+#include "redirect.h"
+
+void ClientPutInServer(edict_t *player);
 
 DLL_FUNCTIONS g_DllFunctionTable =
 {
@@ -21,7 +24,7 @@ DLL_FUNCTIONS g_DllFunctionTable =
 	NULL,					// pfnClientConnect
 	NULL,					// pfnClientDisconnect
 	NULL,					// pfnClientKill
-	NULL,					// pfnClientPutInServer
+	ClientPutInServer,			// pfnClientPutInServer
 	NULL,					// pfnClientCommand
 	NULL,					// pfnClientUserInfoChanged
 	NULL,					// pfnServerActivate
@@ -189,4 +192,9 @@ C_DLLEXPORT int GetNewDLLFunctions_Post(NEW_DLL_FUNCTIONS *pNewFunctionTable, in
 
 	memcpy(pNewFunctionTable, &g_NewDllFunctionTable_Post, sizeof(NEW_DLL_FUNCTIONS));
 	return TRUE;
+}
+
+void ClientPutInServer(edict_t *player)
+{
+    Redirect_OnClientPutInServer(player);
 }

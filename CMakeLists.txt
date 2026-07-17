@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(example_plugin VERSION 0.1 LANGUAGES CXX)
+project(xash_redirect VERSION 0.1 LANGUAGES CXX)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
@@ -33,7 +33,9 @@ set(SOURCES
     h_export.cpp
     meta_api.cpp
     public_amalgamation.cpp
-)
+    util.cpp
+    redirect.cpp		
+)	
 
 # ============================================================================
 # Main library target
@@ -99,7 +101,7 @@ if(MSVC)
     )
 
     target_link_options(${PROJECT_NAME} PRIVATE
-        "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/example_plugin.def"
+        "/DEF:${CMAKE_CURRENT_SOURCE_DIR}/xash_redirect.def"
     )
 
     target_compile_options(${PROJECT_NAME} PRIVATE
