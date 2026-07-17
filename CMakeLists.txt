@@ -34,7 +34,8 @@ set(SOURCES
     meta_api.cpp
     public_amalgamation.cpp
     util.cpp
-    redirect.cpp		
+    redirect.cpp
+    config.cpp		
 )	
 
 # ============================================================================
