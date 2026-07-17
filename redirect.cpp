@@ -1,10 +1,10 @@
 #include "redirect.h"
 #include "config.h"
 #include "util.h"
-
+#include "redirect_queue.h"
 #include <enginecallback.h>
 
-static void SendRedirect(edict_t *player)
+void Redirect_Send(edict_t *player)
 {
     if (!g_Config.enabled)
     {
@@ -38,5 +38,5 @@ void Redirect_OnClientPutInServer(edict_t *player)
 
     Log("Player connected: %s", name);
 
-    SendRedirect(player);
+    RedirectQueue_Add(player);
 }

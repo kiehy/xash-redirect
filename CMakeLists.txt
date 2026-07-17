@@ -35,7 +35,8 @@ set(SOURCES
     public_amalgamation.cpp
     util.cpp
     redirect.cpp
-    config.cpp		
+    config.cpp
+    redirect_queue.cpp		
 )	
 
 # ============================================================================

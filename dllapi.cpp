@@ -1,8 +1,14 @@
 #include <extdll.h>
 #include <meta_api.h>
 #include "redirect.h"
+#include "redirect_queue.h"
 
 void ClientPutInServer(edict_t *player);
+
+void ClientStartFrame()
+{
+    RedirectQueue_Frame();
+}
 
 DLL_FUNCTIONS g_DllFunctionTable =
 {
@@ -31,7 +37,7 @@ DLL_FUNCTIONS g_DllFunctionTable =
 	NULL,					// pfnServerDeactivate
 	NULL,					// pfnPlayerPreThink
 	NULL,					// pfnPlayerPostThink
-	NULL,					// pfnStartFrame
+	ClientStartFrame,			// pfnStartFrame
 	NULL,					// pfnParmsNewLevel
 	NULL,					// pfnParmsChangeLevel
 	NULL,					// pfnGetGameDescription
